@@ -1,0 +1,23 @@
+[versions]
+agp = "8.5.0"
+kotlin = "2.0.0"
+ksp = "2.0.0-1.0.24"
+
+[libraries]
+androidx-core-ktx = "androidx.core:core-ktx:1.13.1"
+appcompat = "androidx.appcompat:appcompat:1.7.0"
+material = "com.google.android.material:material:1.12.0"
+activity = "androidx.activity:activity-ktx:1.9.0"
+constraintlayout = "androidx.constraintlayout:constraintlayout:2.2.0"
+
+lifecycle-viewmodel = "androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0"
+lifecycle-livedata = "androidx.lifecycle:lifecycle-livedata-ktx:2.7.0"
+
+room-runtime = "androidx.room:room-runtime:2.6.1"
+room-compiler = "androidx.room:room-compiler:2.6.1"
+
+coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3"
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
