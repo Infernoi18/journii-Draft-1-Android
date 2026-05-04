@@ -25,9 +25,23 @@ class NoteAdapter(
     override fun onBindViewHolder(holder: NoteViewHolder, position: Int) {
         val note = notes[position]
 
+        val parts = note.category.split("|")
+        val category = parts[0]
+        val type = if (parts.size > 1) parts[1] else "Mix"
+
         holder.binding.tvTitle.text = note.title
         holder.binding.tvContent.text = note.content
-        holder.binding.tvCategory.text = note.category
+        holder.binding.tvCategory.text = category
+
+        val iconRes = when (type) {
+            "Road" -> R.drawable.road
+            "Rail" -> R.drawable.rail
+            "Air" -> R.drawable.air
+            "Ship" -> R.drawable.ship
+            else -> R.drawable.mix
+        }
+
+        holder.binding.ivType.setImageResource(iconRes)
     }
 
     override fun getItemCount(): Int = notes.size

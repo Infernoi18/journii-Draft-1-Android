@@ -12,37 +12,52 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val prefs = getSharedPreferences("user_prefs", MODE_PRIVATE)
+
+        // 🔥 AUTO REDIRECT (IMPORTANT)
+        val isLoggedIn = prefs.getBoolean("isLoggedIn", false)
+        if (isLoggedIn) {
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
+            return
+        }
+
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.btnLogin.setOnClickListener {
-            val username = binding.etUsername.text.toString()
-            val password = binding.etPassword.text.toString()
-
-            if (username.isEmpty() || password.isEmpty()) {
-                Toast.makeText(this, "Enter all fields", Toast.LENGTH_SHORT).show()
-            } else {
-                startActivity(Intent(this, MainActivity::class.java))
-                finish()
-            }
-        }
-
-        binding.tvRegister.setOnClickListener {
-            Toast.makeText(this, "Register clicked", Toast.LENGTH_SHORT).show()
-        }
-
+        // 🔹 LOGIN BUTTON
         binding.btnLogin.setOnClickListener {
 
-            val username = binding.etUsername.text?.toString()?.trim() ?: ""
-            val password = binding.etPassword.text?.toString()?.trim() ?: ""
+            val username = binding.etUsername.text.toString().trim()
+            val password = binding.etPassword.text.toString().trim()
 
             if (username.isEmpty() || password.isEmpty()) {
                 Toast.makeText(this, "Enter all fields", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
-            startActivity(Intent(this, MainActivity::class.java))
-            finish()
+            val savedUsername = prefs.getString("username", "")
+            val savedPassword = prefs.getString("password", "")
+
+            if (username == savedUsername && password == savedPassword) {
+
+                // 🔥 SAVE LOGIN STATE
+                prefs.edit()
+                    .putBoolean("isLoggedIn", true)
+                    .apply()
+
+                startActivity(Intent(this, MainActivity::class.java))
+                finish()
+
+            } else {
+                Toast.makeText(this, "Invalid credentials", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        // 🔹 GO TO REGISTER
+        binding.tvRegister.setOnClickListener {
+            startActivity(Intent(this, RegisterActivity::class.java))
         }
     }
 }

@@ -21,7 +21,7 @@ class RegisterActivity : AppCompatActivity() {
             val username = binding.etUsername.text.toString().trim()
             val password = binding.etPassword.text.toString().trim()
 
-            // ✅ FIX: prevent empty save
+
             if (username.isEmpty() || password.isEmpty()) {
                 Toast.makeText(this, "Fill all fields", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener

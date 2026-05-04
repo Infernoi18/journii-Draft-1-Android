@@ -43,6 +43,16 @@
             android:layout_marginTop="16dp"
             android:padding="12dp"/>
 
+        <!-- FIXED SPINNER -->
+        <Spinner
+            android:id="@+id/spinnerType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:padding="12dp"
+            android:background="@drawable/spinner_bg"
+            android:popupBackground="@color/beige_card"/>
+
         <Button
             android:id="@+id/btnSave"
             android:layout_width="match_parent"

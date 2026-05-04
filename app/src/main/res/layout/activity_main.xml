@@ -17,6 +17,19 @@
         app:layout_constraintStart_toStartOf="parent"
         android:layout_margin="16dp"/>
 
+    <!-- 🔴 LOGOUT BUTTON -->
+    <Button
+        android:id="@+id/btnLogout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Logout"
+        android:textSize="12sp"
+        android:backgroundTint="@color/red_primary"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="16dp"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="0dp"

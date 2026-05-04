@@ -6,7 +6,7 @@
         android:label="Journii"
         android:theme="@style/Theme.Journii">
 
-        <!-- LOGIN SCREEN (Launcher) -->
+
         <activity
             android:name=".LoginActivity"
             android:exported="true">
@@ -16,7 +16,8 @@
             </intent-filter>
         </activity>
 
-        <!-- OTHER SCREENS -->
+        <activity android:name=".RegisterActivity" />
+
         <activity android:name=".MainActivity" />
         <activity android:name=".AddNoteActivity" />
 

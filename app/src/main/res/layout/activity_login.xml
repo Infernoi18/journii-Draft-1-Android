@@ -12,6 +12,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Username"
+        android:textColor="@color/black"
+        android:textEditSuggestionItemLayout="@color/black"
+        android:textColorHint="@color/black"
         android:backgroundTint="@color/red_light"/>
 
     <EditText
@@ -19,6 +22,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Password"
+        android:textColor="@color/black"
+        android:textEditSuggestionItemLayout="@color/black"
+        android:textColorHint="@color/black"
         android:inputType="textPassword"
         android:layout_marginTop="16dp"
         android:backgroundTint="@color/red_light"/>
@@ -32,7 +38,6 @@
         android:backgroundTint="@color/red_primary"
         android:layout_marginTop="24dp"/>
 
-    <!-- ✅ THIS FIXES YOUR ERROR -->
     <TextView
         android:id="@+id/tvRegister"
         android:layout_width="wrap_content"

@@ -19,19 +19,32 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // 🔥 SharedPreferences
+        val prefs = getSharedPreferences("user_prefs", MODE_PRIVATE)
+
         adapter = NoteAdapter(emptyList())
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
         binding.recyclerView.adapter = adapter
 
         val dao = NoteDatabase.getDatabase(this).noteDao()
 
-        // 🔥 THIS IS THE IMPORTANT PART
         dao.getAllNotes().observe(this, Observer { notes ->
             adapter.updateList(notes)
         })
 
         binding.fabAdd.setOnClickListener {
             startActivity(Intent(this, AddNoteActivity::class.java))
+        }
+
+        // 🔴 LOGOUT BUTTON CLICK
+        binding.btnLogout.setOnClickListener {
+
+            prefs.edit()
+                .putBoolean("isLoggedIn", false)
+                .apply()
+
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
         }
     }
 }
