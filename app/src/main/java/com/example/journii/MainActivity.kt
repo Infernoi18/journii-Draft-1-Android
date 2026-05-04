@@ -5,12 +5,14 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.journii.data.Note
 import com.example.journii.data.NoteDatabase
 import com.example.journii.databinding.ActivityMainBinding
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
@@ -20,8 +22,22 @@ class MainActivity : AppCompatActivity() {
     private lateinit var dao: com.example.journii.data.NoteDao
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        // ✅ Install splash BEFORE super
+        val splashScreen = installSplashScreen()
+
         super.onCreate(savedInstanceState)
 
+        var keepSplash = true
+
+        lifecycleScope.launch {
+            delay(1200)
+            keepSplash = false
+        }
+
+        splashScreen.setKeepOnScreenCondition { keepSplash }
+
+        // ✅ Normal setup
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -40,8 +56,6 @@ class MainActivity : AppCompatActivity() {
 
         adapter = NoteAdapter(
             emptyList(),
-
-
             onItemClick = { note ->
                 val intent = Intent(this, AddNoteActivity::class.java)
                 intent.putExtra("note_id", note.id)
@@ -50,8 +64,6 @@ class MainActivity : AppCompatActivity() {
                 intent.putExtra("note_category", note.category)
                 startActivity(intent)
             },
-
-
             onItemLongClick = { note ->
                 showDeleteDialog(note)
             }
@@ -68,7 +80,6 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, AddNoteActivity::class.java))
         }
     }
-
 
     private fun showDeleteDialog(note: Note) {
         AlertDialog.Builder(this)

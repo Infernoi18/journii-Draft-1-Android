@@ -1,14 +1,29 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
 
+    <!-- YOUR EXISTING THEME (KEEP AS IS) -->
     <style name="Theme.Journii" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="colorPrimary">@color/red_primary</item>
         <item name="colorPrimaryContainer">@color/red_light</item>
         <item name="android:statusBarColor">@color/red_dark</item>
-
         <item name="android:windowBackground">@color/beige</item>
-
         <item name="android:textColor">@color/text_primary</item>
+    </style>
+
+    <!-- 🔥 NEW SPLASH THEME -->
+    <style name="Theme.Journii.Splash" parent="Theme.SplashScreen">
+
+        <!-- Background -->
+        <item name="windowSplashScreenBackground">@color/beige</item>
+
+        <!-- Your logo (THIS is your bird vector) -->
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_logo</item>
+
+        <!-- Optional background behind icon -->
+        <item name="windowSplashScreenIconBackgroundColor">@color/beige</item>
+
+        <!-- After splash → go to your normal theme -->
+        <item name="postSplashScreenTheme">@style/Theme.Journii</item>
+
     </style>
 
 </resources>

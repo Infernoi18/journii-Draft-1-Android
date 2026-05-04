@@ -56,6 +56,6 @@ dependencies {
 
     // 🔥 REQUIRED FOR KSP INTERNAL REFLECTION
     implementation("org.jetbrains.kotlin:kotlin-reflect:1.9.24")
-
+    implementation("androidx.core:core-splashscreen:1.0.1")
     testImplementation("junit:junit:4.13.2")
 }
