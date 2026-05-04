@@ -1,5 +1,7 @@
 package com.example.journii
 
+import android.text.Html
+import android.text.method.LinkMovementMethod
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -12,7 +14,7 @@ class NoteAdapter(
     private val onItemLongClick: (Note) -> Unit
 ) : RecyclerView.Adapter<NoteAdapter.NoteViewHolder>() {
 
-    inner class NoteViewHolder(val binding: ItemNoteBinding) :
+    class NoteViewHolder(val binding: ItemNoteBinding) :
         RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteViewHolder {
@@ -32,7 +34,11 @@ class NoteAdapter(
         val type = if (parts.size > 1) parts[1] else "Mix"
 
         holder.binding.tvTitle.text = note.title
-        holder.binding.tvContent.text = note.content
+
+        val spanned = Html.fromHtml(note.content, Html.FROM_HTML_MODE_COMPACT)
+        holder.binding.tvContent.text = spanned
+        holder.binding.tvContent.movementMethod = LinkMovementMethod.getInstance()
+
         holder.binding.tvCategory.text = category
 
         val iconRes = when (type) {
@@ -45,11 +51,9 @@ class NoteAdapter(
 
         holder.binding.ivType.setImageResource(iconRes)
 
-
         holder.itemView.setOnClickListener {
             onItemClick(note)
         }
-
 
         holder.itemView.setOnLongClickListener {
             onItemLongClick(note)
