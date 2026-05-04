@@ -42,20 +42,21 @@ dependencies {
     implementation("androidx.activity:activity-ktx:1.9.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
 
-    // 🔥 ROOM (FULL SET — YOU WERE MISSING PARTS)
+
     implementation("androidx.room:room-runtime:2.6.1")
     implementation("androidx.room:room-ktx:2.6.1")
     ksp("androidx.room:room-compiler:2.6.1")
 
-    // 🔥 LIFECYCLE (FIXES LiveData + viewModelScope)
+
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.7.0")
 
-    // 🔥 COROUTINES (FIXES suspend)
+
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1")
 
-    // 🔥 REQUIRED FOR KSP INTERNAL REFLECTION
+
     implementation("org.jetbrains.kotlin:kotlin-reflect:1.9.24")
     implementation("androidx.core:core-splashscreen:1.0.1")
+    implementation("com.google.android.material:material:1.11.0")
     testImplementation("junit:junit:4.13.2")
 }

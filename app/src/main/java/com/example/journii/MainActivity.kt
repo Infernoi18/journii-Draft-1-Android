@@ -23,25 +23,32 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
-        // ✅ Install splash BEFORE super
         val splashScreen = installSplashScreen()
-
         super.onCreate(savedInstanceState)
 
         var keepSplash = true
 
+        val prefs = getSharedPreferences("user_prefs", MODE_PRIVATE)
+        val isLoggedIn = prefs.getBoolean("isLoggedIn", false)
+
         lifecycleScope.launch {
             delay(1200)
             keepSplash = false
+
+            // 👉 Navigate AFTER splash delay
+            if (!isLoggedIn) {
+                startActivity(Intent(this@MainActivity, LoginActivity::class.java))
+                finish()
+            }
         }
 
         splashScreen.setKeepOnScreenCondition { keepSplash }
 
-        // ✅ Normal setup
+        // 👉 Only load UI if logged in
+        if (!isLoggedIn) return
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        val prefs = getSharedPreferences("user_prefs", MODE_PRIVATE)
 
         binding.btnLogout.setOnClickListener {
             prefs.edit()

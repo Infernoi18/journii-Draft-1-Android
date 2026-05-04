@@ -27,10 +27,18 @@ class RegisterActivity : AppCompatActivity() {
 
             val username = binding.etUsername.text.toString().trim()
             val password = binding.etPassword.text.toString().trim()
+            val confirmPassword = binding.etConfirmPassword.text.toString().trim()
 
-            if (username.isEmpty() || password.isEmpty()) {
+            if (username.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
                 Toast.makeText(this, "Fill all fields", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
+            }
+
+            if (password != confirmPassword) {
+                binding.layoutConfirmPassword.error = "Passwords do not match"
+                return@setOnClickListener
+            } else {
+                binding.layoutConfirmPassword.error = null
             }
 
             val savedUser = prefs.getString("username", null)
