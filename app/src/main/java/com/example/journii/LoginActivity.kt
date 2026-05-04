@@ -13,20 +13,18 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        binding = ActivityLoginBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
         val prefs = getSharedPreferences("user_prefs", MODE_PRIVATE)
 
-        // 🔥 AUTO REDIRECT (IMPORTANT)
+
         val isLoggedIn = prefs.getBoolean("isLoggedIn", false)
         if (isLoggedIn) {
             startActivity(Intent(this, MainActivity::class.java))
             finish()
-            return
         }
 
-        binding = ActivityLoginBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-        // 🔹 LOGIN BUTTON
         binding.btnLogin.setOnClickListener {
 
             val username = binding.etUsername.text.toString().trim()
@@ -37,12 +35,12 @@ class LoginActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            val savedUsername = prefs.getString("username", "")
-            val savedPassword = prefs.getString("password", "")
+            val savedUser = prefs.getString("username", null)
+            val savedPass = prefs.getString("password", null)
 
-            if (username == savedUsername && password == savedPassword) {
+            if (username == savedUser && password == savedPass) {
 
-                // 🔥 SAVE LOGIN STATE
+
                 prefs.edit()
                     .putBoolean("isLoggedIn", true)
                     .apply()
@@ -55,7 +53,6 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
-        // 🔹 GO TO REGISTER
         binding.tvRegister.setOnClickListener {
             startActivity(Intent(this, RegisterActivity::class.java))
         }

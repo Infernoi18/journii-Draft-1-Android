@@ -7,7 +7,9 @@ import com.example.journii.data.Note
 import com.example.journii.databinding.ItemNoteBinding
 
 class NoteAdapter(
-    private var notes: List<Note>
+    private var notes: List<Note>,
+    private val onItemClick: (Note) -> Unit,
+    private val onItemLongClick: (Note) -> Unit
 ) : RecyclerView.Adapter<NoteAdapter.NoteViewHolder>() {
 
     inner class NoteViewHolder(val binding: ItemNoteBinding) :
@@ -42,6 +44,17 @@ class NoteAdapter(
         }
 
         holder.binding.ivType.setImageResource(iconRes)
+
+
+        holder.itemView.setOnClickListener {
+            onItemClick(note)
+        }
+
+
+        holder.itemView.setOnLongClickListener {
+            onItemLongClick(note)
+            true
+        }
     }
 
     override fun getItemCount(): Int = notes.size
